@@ -2,9 +2,11 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>제품 인증 정보</title>
+  <title>Product Certification Info</title>
   <style>
     body { font-family: sans-serif; margin: 2rem; }
+    h1 { margin-bottom: 0.5rem; }
+    .subtitle { font-size: 1rem; color: #333; margin-top: 0; line-height: 1.5; }
     table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
     td, th { border: 1px solid #ddd; padding: 0.75rem; vertical-align: middle; }
     td img { max-height: 50px; max-width: 120px; }
@@ -12,62 +14,59 @@
   </style>
 </head>
 <body>
-  <h1>제품 인증 정보</h1>
+  <h1>Product Certification Info</h1>
+  <div class="subtitle" id="subtitle"></div>
+
   <table id="info-table">
     <tr>
-      <th>이름</th>
-      <th>모델명</th>
-      <th>인증번호</th>
-      <th>로고</th>
+      <th>Certification No</th>
+      <th>Logo</th>
     </tr>
   </table>
 
-<script>
-  const targetKey = "ABL4";
+  <script>
+    const targetKey = "ABL4";
 
-  fetch("data.json")
-    .then(res => res.json())
-    .then(data => {
-      const item = data[targetKey];
-      const logoMap = data["certificationLogos"];
-      if (!item || !item.certifications || item.certifications.length === 0) {
-        throw new Error("데이터 없음 또는 인증 정보 없음");
-      }
+    fetch("data.json")
+      .then(res => res.json())
+      .then(data => {
+        const item = data[targetKey];
+        const logoMap = data["certificationLogos"];
+        if (!item || !item.certifications || item.certifications.length === 0) {
+          throw new Error("Missing data or certifications");
+        }
 
-      const table = document.getElementById("info-table");
+        // Name & Model No 표시
+        const subtitle = document.getElementById("subtitle");
+        subtitle.innerHTML = `
+          <strong>Name:</strong> ${item.name || "-"}<br>
+          <strong>Model No:</strong> ${item.model || "-"}
+        `;
 
-      item.certifications.forEach((certNumber, index) => {
+        // 테이블에 인증 정보 추가
+        const table = document.getElementById("info-table");
+        item.certifications.forEach(certNumber => {
+          const row = document.createElement("tr");
+
+          const tdCert = document.createElement("td");
+          tdCert.textContent = certNumber;
+
+          const tdImage = document.createElement("td");
+          const img = document.createElement("img");
+          img.src = "images/" + (logoMap[certNumber] || "default.png");
+          img.alt = certNumber;
+          tdImage.appendChild(img);
+
+          row.appendChild(tdCert);
+          row.appendChild(tdImage);
+          table.appendChild(row);
+        });
+      })
+      .catch(() => {
         const row = document.createElement("tr");
-
-        // 첫 줄에만 name, model 표시
-        const tdName = document.createElement("td");
-        tdName.textContent = index === 0 ? item.name || "-" : "";
-
-        const tdModel = document.createElement("td");
-        tdModel.textContent = index === 0 ? item.model || "-" : "";
-
-        const tdCert = document.createElement("td");
-        tdCert.textContent = certNumber;
-
-        const tdImage = document.createElement("td");
-        const img = document.createElement("img");
-        img.src = "images/" + (logoMap[certNumber] || "default.png");  // 기본 이미지 fallback
-        img.alt = certNumber;
-        tdImage.appendChild(img);
-
-        row.appendChild(tdName);
-        row.appendChild(tdModel);
-        row.appendChild(tdCert);
-        row.appendChild(tdImage);
-        table.appendChild(row);
+        row.innerHTML = "<td colspan='2'>Failed to load data.</td>";
+        document.getElementById("info-table").appendChild(row);
       });
-    })
-    .catch(() => {
-      const row = document.createElement("tr");
-      row.innerHTML = "<td colspan='4'>데이터를 불러오지 못했습니다.</td>";
-      document.getElementById("info-table").appendChild(row);
-    });
-</script>
-
+  </script>
 </body>
 </html>
