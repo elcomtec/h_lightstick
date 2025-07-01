@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,37 +14,60 @@
 <body>
   <h1>제품 인증 정보</h1>
   <table id="info-table">
-    <tr><th>인증번호</th><th>로고</th></tr>
+    <tr>
+      <th>이름</th>
+      <th>모델명</th>
+      <th>인증번호</th>
+      <th>로고</th>
+    </tr>
   </table>
 
-  <script>
-    fetch("data.json")
-      .then(res => res.json())
-      .then(data => {
-        const table = document.getElementById("info-table");
-        for (const key in data) {
-          const value = data[key];
-          const row = document.createElement("tr");
+<script>
+  const targetKey = "ABL4";
 
-          const tdText = document.createElement("td");
-          tdText.textContent = key;
+  fetch("data.json")
+    .then(res => res.json())
+    .then(data => {
+      const item = data[targetKey];
+      const logoMap = data["certificationLogos"];
+      if (!item || !item.certifications || item.certifications.length === 0) {
+        throw new Error("데이터 없음 또는 인증 정보 없음");
+      }
 
-          const tdImage = document.createElement("td");
-          const img = document.createElement("img");
-          img.src = value;
-          img.alt = key;
-          tdImage.appendChild(img);
+      const table = document.getElementById("info-table");
 
-          row.appendChild(tdText);
-          row.appendChild(tdImage);
-          table.appendChild(row);
-        }
-      })
-      .catch(() => {
+      item.certifications.forEach((certNumber, index) => {
         const row = document.createElement("tr");
-        row.innerHTML = "<td colspan='2'>데이터를 불러오지 못했습니다.</td>";
-        document.getElementById("info-table").appendChild(row);
+
+        // 첫 줄에만 name, model 표시
+        const tdName = document.createElement("td");
+        tdName.textContent = index === 0 ? item.name || "-" : "";
+
+        const tdModel = document.createElement("td");
+        tdModel.textContent = index === 0 ? item.model || "-" : "";
+
+        const tdCert = document.createElement("td");
+        tdCert.textContent = certNumber;
+
+        const tdImage = document.createElement("td");
+        const img = document.createElement("img");
+        img.src = "images/" + (logoMap[certNumber] || "default.png");  // 기본 이미지 fallback
+        img.alt = certNumber;
+        tdImage.appendChild(img);
+
+        row.appendChild(tdName);
+        row.appendChild(tdModel);
+        row.appendChild(tdCert);
+        row.appendChild(tdImage);
+        table.appendChild(row);
       });
-  </script>
+    })
+    .catch(() => {
+      const row = document.createElement("tr");
+      row.innerHTML = "<td colspan='4'>데이터를 불러오지 못했습니다.</td>";
+      document.getElementById("info-table").appendChild(row);
+    });
+</script>
+
 </body>
 </html>
