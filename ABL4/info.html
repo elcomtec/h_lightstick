@@ -16,6 +16,9 @@
         color: #333;
         margin-top: 0;
         line-height: 1.5;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
       table {
         border-collapse: collapse;
@@ -39,7 +42,14 @@
   </head>
   <body>
     <h1>Product Certification Info</h1>
-    <div class="subtitle" id="subtitle"></div>
+    <div class="subtitle" id="subtitle">
+      <div id="product-text"></div>
+      <img
+        src="../bluetooth_logo_icon_128x.png"
+        alt="Bluetooth Logo"
+        style="height: 68px"
+      />
+    </div>
 
     <table id="info-table">
       <tr>
@@ -63,13 +73,13 @@
           }
 
           // Name & Model No 표시
-          const subtitle = document.getElementById("subtitle");
-          subtitle.innerHTML = `
-          <strong>Name:</strong> ${item.name || "-"}<br>
-          <strong>Model No:</strong> ${item.model || "-"}
-        `;
+          const textBox = document.getElementById("product-text");
+          textBox.innerHTML = `
+            <strong>Name:</strong> ${item.name || "-"}<br>
+            <strong>Model No:</strong> ${item.model || "-"}
+          `;
 
-          // 테이블에 인증 정보 추가
+          // 인증 정보 테이블에 추가
           const table = document.getElementById("info-table");
           item.certifications.forEach((certNumber) => {
             const row = document.createElement("tr");
@@ -77,10 +87,20 @@
             const tdCert = document.createElement("td");
             tdCert.textContent = certNumber;
 
+            tdCert.style.textAlign = "center";
+            tdCert.style.verticalAlign = "middle";
+
             const tdImage = document.createElement("td");
             const img = document.createElement("img");
             img.src = "images/" + logoMap[certNumber];
             img.alt = certNumber;
+
+            // ✅ 이미지 가운데 정렬 스타일 적용
+            img.style.display = "block";
+            img.style.margin = "auto";
+            img.style.maxHeight = "50px";
+            img.style.maxWidth = "120px";
+
             tdImage.appendChild(img);
 
             row.appendChild(tdCert);
