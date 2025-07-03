@@ -85,7 +85,12 @@
             const row = document.createElement("tr");
 
             const tdCert = document.createElement("td");
-            tdCert.textContent = certNumber;
+
+            if (certNumber == "NTC") {
+              tdCert.textContent = "-";
+            } else {
+              tdCert.textContent = certNumber;
+            }
 
             tdCert.style.textAlign = "center";
             tdCert.style.verticalAlign = "middle";

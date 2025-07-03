@@ -2,10 +2,10 @@
   "certificationInfos": {
     "name": "2025 FIVB OFFICIAL LIGHT BAND",
     "model": "HYBEOLB-2401",
-    "certifications": ["-", "-"]
+    "certifications": ["-", "NTC"]
   },
   "certificationLogos": {
     "-": "EU.png",
-    "ESD–RCE–2541435": "NTC.png"
+    "NTC": "NTC.png"
   }
 }
