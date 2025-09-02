@@ -1,0 +1,32 @@
+{
+  "ProductCertificationInfo": {
+    "name": "LESSERAFIM OFFICIAL LIGHT STICK",
+    "model": "LSFNN25JOS900NN0",
+    "certificationLogos": [
+      "KC",
+      "FCC",
+      "MIC",
+      "EU",
+      "NTC",
+      "NBTC",
+      "NCC",
+      "SDPPI",
+      "IMDA",
+      "SIRIM",
+      "IC"
+    ],
+    "certificationInfos": [
+      "R-R-1EL-LFFA23JO",
+      "2A9BA-LFFA23JO",
+      "020-230015",
+      "-",
+      "ESD-RCE-2543583",
+      "SD02642-25",
+      "CCAL23LP0271T1",
+      "111842/DJID/2025",
+      "ESER/25/3654",
+      "RGZE/13A/0725/S(25-3350)",
+      "30000-LFFA23JO"
+    ]
+  }
+}

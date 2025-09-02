@@ -1,0 +1,32 @@
+{
+  "ProductCertificationInfo": {
+    "name": "TXT OFFICIAL LIGHT STICK VER.2",
+    "model": "TXTNN24JOS900NN0",
+    "certificationLogos": [
+      "KC",
+      "FCC",
+      "MIC",
+      "EU",
+      "NTC",
+      "NBTC",
+      "NCC",
+      "SDPPI",
+      "IMDA",
+      "SIRIM",
+      "IC"
+    ],
+    "certificationInfos": [
+      "R-R-1EL-TTNN23JO",
+      "2A9BA-TTNN23JO",
+      "020-230349",
+      "-",
+      "ESD-RCE-2543366",
+      "SD02599-25",
+      "CCAL23LP1001T0",
+      "111843/DJID/2025",
+      "ESER/25/3653",
+      "RGZE/12A/0725/S(25-3351)",
+      "30000-TTNN23JO"
+    ]
+  }
+}

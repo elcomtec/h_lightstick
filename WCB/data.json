@@ -2,7 +2,7 @@
   "ProductCertificationInfo": {
     "name": "HYBE OFFICIAL LIGHT BAND",
     "model": "ALLET25JOS001NN0",
-    "certificationLogos": ["EU.png", "NTC.png"],
+    "certificationLogos": ["EU", "NTC"],
     "certificationInfos": ["-", "ESD-RCE-2543863"]
   }
 }
