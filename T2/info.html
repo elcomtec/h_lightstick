@@ -30,10 +30,13 @@
         border: 1px solid #ddd;
         padding: 0.75rem;
         vertical-align: middle;
+        text-align: center;
       }
       td img {
         max-height: 50px;
         max-width: 120px;
+        display: block;
+        margin: auto;
       }
       th {
         background-color: #f5f5f5;
@@ -59,65 +62,80 @@
     </table>
 
     <script>
+      // 외부 JSON 파일(data.json) 읽기
       fetch("data.json")
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) throw new Error("Failed to load JSON");
+          return res.json();
+        })
         .then((data) => {
           const item = data["ProductCertificationInfo"];
-          if (
-            !item ||
-            !item.certificationInfos ||
-            item.certificationInfos.length === 0 ||
-            !item.certificationLogos ||
-            item.certificationLogos.length === 0
-          ) {
-            throw new Error("Missing data or certifications");
+          if (!item || !item.certificationInfos || !item.certificationLogos) {
+            throw new Error("Missing data in JSON");
           }
 
           // Name & Model No 표시
           const textBox = document.getElementById("product-text");
           textBox.innerHTML = `
-        <strong>Name:</strong> ${item.name || "-"}<br>
-        <strong>Model No:</strong> ${item.model || "-"}
-      `;
+            <strong>Name:</strong> ${item.name || "-"}<br>
+            <strong>Model No:</strong> ${item.model || "-"}
+          `;
 
           // 인증 정보 테이블에 추가
           const table = document.getElementById("info-table");
+          const certInfos = item.certificationInfos;
+          const logos = item.certificationLogos;
 
-          // certificationInfos와 certificationLogos를 같이 순회
-          for (let i = 0; i < item.certificationInfos.length; i++) {
-            const certInfo = item.certificationInfos[i];
-            const logoFile = item.certificationLogos[i] || ""; // 로고 없으면 빈 문자열
+          for (let i = 0; i < certInfos.length; i++) {
+            const certInfo = certInfos[i] || "-";
+            const logoFile = logos[i] || "";
 
             const row = document.createElement("tr");
 
-            // 인증 번호
             const tdCert = document.createElement("td");
-            tdCert.textContent = certInfo || "-";
-            tdCert.style.textAlign = "center";
-            tdCert.style.verticalAlign = "middle";
+            tdCert.textContent = certInfo;
 
-            // 로고 이미지
             const tdImage = document.createElement("td");
             if (logoFile) {
               const img = document.createElement("img");
               img.src = "images/" + logoFile + ".png";
-              img.alt = certInfo || "Logo";
-              img.style.display = "block";
-              img.style.margin = "auto";
-              img.style.maxHeight = "50px";
-              img.style.maxWidth = "120px";
+              img.alt = certInfo;
               tdImage.appendChild(img);
             } else {
               tdImage.textContent = "-";
-              tdImage.style.textAlign = "center";
             }
 
             row.appendChild(tdCert);
             row.appendChild(tdImage);
             table.appendChild(row);
           }
+
+          // ✅ 모든 행 높이 동일하게 맞춤
+          function setUniformRowHeight() {
+            const rows = table.querySelectorAll("tr");
+            let maxHeight = 0;
+            rows.forEach((row) => {
+              row.style.height = "auto"; // 초기화
+              const h = row.offsetHeight;
+              if (h > maxHeight) maxHeight = h;
+            });
+            rows.forEach((row) => (row.style.height = maxHeight + "px"));
+          }
+
+          // 이미지 로딩 후 높이 계산
+          window.addEventListener("load", () => setUniformRowHeight());
+
+          const imgs = table.querySelectorAll("img");
+          let loadedCount = 0;
+          imgs.forEach((img) => {
+            img.onload = () => {
+              loadedCount++;
+              if (loadedCount === imgs.length) setUniformRowHeight();
+            };
+          });
         })
-        .catch(() => {
+        .catch((err) => {
+          console.error(err);
           const row = document.createElement("tr");
           row.innerHTML = "<td colspan='2'>Failed to load data.</td>";
           document.getElementById("info-table").appendChild(row);
