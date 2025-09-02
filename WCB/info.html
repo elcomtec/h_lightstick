@@ -62,12 +62,13 @@
       fetch("data.json")
         .then((res) => res.json())
         .then((data) => {
-          const item = data["certificationInfos"];
-          const logoMap = data["certificationLogos"];
+          const item = data["ProductCertificationInfo"];
           if (
             !item ||
-            !item.certifications ||
-            item.certifications.length === 0
+            !item.certificationInfos ||
+            item.certificationInfos.length === 0 ||
+            !item.certificationLogos ||
+            item.certificationLogos.length === 0
           ) {
             throw new Error("Missing data or certifications");
           }
@@ -75,43 +76,46 @@
           // Name & Model No 표시
           const textBox = document.getElementById("product-text");
           textBox.innerHTML = `
-            <strong>Name:</strong> ${item.name || "-"}<br>
-            <strong>Model No:</strong> ${item.model || "-"}
-          `;
+        <strong>Name:</strong> ${item.name || "-"}<br>
+        <strong>Model No:</strong> ${item.model || "-"}
+      `;
 
           // 인증 정보 테이블에 추가
           const table = document.getElementById("info-table");
-          item.certifications.forEach((certNumber) => {
+
+          // certificationInfos와 certificationLogos를 같이 순회
+          for (let i = 0; i < item.certificationInfos.length; i++) {
+            const certInfo = item.certificationInfos[i];
+            const logoFile = item.certificationLogos[i] || ""; // 로고 없으면 빈 문자열
+
             const row = document.createElement("tr");
 
+            // 인증 번호
             const tdCert = document.createElement("td");
-
-            if (certNumber == "NTC") {
-              tdCert.textContent = "-";
-            } else {
-              tdCert.textContent = certNumber;
-            }
-
+            tdCert.textContent = certInfo || "-";
             tdCert.style.textAlign = "center";
             tdCert.style.verticalAlign = "middle";
 
+            // 로고 이미지
             const tdImage = document.createElement("td");
-            const img = document.createElement("img");
-            img.src = "images/" + logoMap[certNumber];
-            img.alt = certNumber;
-
-            // ✅ 이미지 가운데 정렬 스타일 적용
-            img.style.display = "block";
-            img.style.margin = "auto";
-            img.style.maxHeight = "50px";
-            img.style.maxWidth = "120px";
-
-            tdImage.appendChild(img);
+            if (logoFile) {
+              const img = document.createElement("img");
+              img.src = "images/" + logoFile;
+              img.alt = certInfo || "Logo";
+              img.style.display = "block";
+              img.style.margin = "auto";
+              img.style.maxHeight = "50px";
+              img.style.maxWidth = "120px";
+              tdImage.appendChild(img);
+            } else {
+              tdImage.textContent = "-";
+              tdImage.style.textAlign = "center";
+            }
 
             row.appendChild(tdCert);
             row.appendChild(tdImage);
             table.appendChild(row);
-          });
+          }
         })
         .catch(() => {
           const row = document.createElement("tr");
