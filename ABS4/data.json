@@ -2,7 +2,7 @@
   "certificationInfos": {
     "name": "BTS OFFICIAL LIGHT STICK VER.4",
     "model": "HYBEBTSOLSV401",
-    "certifications": [
+    "certificationLogos": [
       "KC",
       "FCC",
       "JMIC",
@@ -18,23 +18,23 @@
       "WPC",
       "SUBTEL",
       "RCM"
+    ],
+    "certificationInfos": [
+      "R-R-1EL-BTSV401",
+      "2A9BA-BTSV401",
+      "020-250308",
+      "-",
+      "ESD-RCE-2545219",
+      "SD06614-25",
+      "CCAL25LP1190T6 ",
+      "115375/DJID/2025",
+      "-",
+      "RGZE/14A/1125/S(25-6020)",
+      "30000-BTSV401",
+      "07593-25-18288",
+      "ETA-SD-20251009119",
+      "-",
+      "-"
     ]
-  },
-  "certificationLogos": {
-    "KC": "R-R-1EL-BTSV401",
-    "FCC": "2A9BA-BTSV401",
-    "JMIC": "020-250308",
-    "EU": "-",
-    "NTC": "ESD-RCE-2545219",
-    "NBTC": "SD06614-25",
-    "NCC": "CCAL25LP1190T6 ",
-    "DJJD": "115375/DJID/2025",
-    "IMDA": "-",
-    "SIRIM": "RGZE/14A/1125/S(25-6020)",
-    "IC": "30000-BTSV401",
-    "ANATEL": "07593-25-18288",
-    "WPC": "ETA-SD-20251009119",
-    "SUBTEL": "-",
-    "RCM": "-"
   }
 }
