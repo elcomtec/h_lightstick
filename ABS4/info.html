@@ -88,7 +88,10 @@
 
           for (let i = 0; i < certInfos.length; i++) {
             const certInfo = certInfos[i] || "-";
-            const logoFile = logos[i] || "";
+
+            // 로고 문자열 (파일명 + 확장자 기대)
+            const raw = logos[i] ?? "";
+            const logoFileRaw = raw.toString().trim();
 
             const row = document.createElement("tr");
 
@@ -96,13 +99,25 @@
             tdCert.textContent = certInfo;
 
             const tdImage = document.createElement("td");
-            if (logoFile) {
-              const img = document.createElement("img");
-              img.src = "images/" + logoFile + ".png";
-              img.alt = certInfo;
-              tdImage.appendChild(img);
-            } else {
+
+            if (!logoFileRaw || logoFileRaw === "-") {
+              // "-" 또는 빈 값 → 로고 없음
               tdImage.textContent = "-";
+            } else {
+              // 확장자까지 포함된 파일명 사용 (예: kc.png / kc.jpg)
+              const img = document.createElement("img");
+              img.src = "images/" + logoFileRaw;
+              img.alt = certInfo;
+
+              // 파일이 없으면 깨진 이미지 대신 "-" 표시
+              img.onerror = () => {
+                tdImage.textContent = "-";
+                if (img.parentNode) {
+                  tdImage.remove();
+                }
+              };
+
+              tdImage.appendChild(img);
             }
 
             row.appendChild(tdCert);
@@ -123,16 +138,23 @@
           }
 
           // 이미지 로딩 후 높이 계산
-          window.addEventListener("load", () => setUniformRowHeight());
-
           const imgs = table.querySelectorAll("img");
           let loadedCount = 0;
-          imgs.forEach((img) => {
-            img.onload = () => {
-              loadedCount++;
-              if (loadedCount === imgs.length) setUniformRowHeight();
-            };
-          });
+
+          if (imgs.length === 0) {
+            setUniformRowHeight();
+          } else {
+            imgs.forEach((img) => {
+              const done = () => {
+                loadedCount++;
+                if (loadedCount === imgs.length) {
+                  setUniformRowHeight();
+                }
+              };
+              img.onload = done;
+              img.onerror = done;
+            });
+          }
         })
         .catch((err) => {
           console.error(err);
