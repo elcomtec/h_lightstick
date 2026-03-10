@@ -1,0 +1,32 @@
+{
+  "ProductCertificationInfo": {
+    "name": "SEVENTEEN OFFICIAL LIGHT STICK VER.3 SE",
+    "model": "SVTNN24JOS902NN0",
+    "certificationLogos": [
+      "KC",
+      "FCC",
+      "MIC",
+      "EU",
+      "NTC",
+      "NBTC",
+      "NCC",
+      "SDPPI",
+      "IMDA",
+      "SIRIM",
+      "IC"
+    ],
+    "certificationInfos": [
+      "R-R-1EL-SVFA23JO",
+      "2A9BA-SVFA23JO",
+      "020-230016",
+      "-",
+      "ESD–RCE–2541435",
+      "SD00362-25",
+      "CCAL23LP0261T8",
+      "108117/DJID/2025",
+      "ESER/25/0907",
+      "RGZE/10A/0225/S(25-0508)",
+      "30000-SVFA23JO"
+    ]
+  }
+}
