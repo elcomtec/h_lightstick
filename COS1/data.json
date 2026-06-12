@@ -1,14 +1,14 @@
 {
   "ProductCertificationInfo": {
-    "name": "ENHYPEN OFFICIAL LIGHT STICK VER.2 NEW",
-    "model": "ENHNN26JOS900NN0",
+    "name": "CORTIS OFFICIAL LIGHT STICK",
+    "model": "HYBECOROLSV101",
     "certificationLogos": ["KC", "FCC", "MIC", "EU", "IC"],
     "certificationInfos": [
-      "R-R-1EL-EN-S901",
-      "2A9BA-EN-S901",
-      "020-240258",
+      "R-R-1EL-CRTV101",
+      "2A9BA-CRTV101",
+      "020-260191",
       "-",
-      "30000-ENS901"
+      "30000-CRTV101"
     ]
   }
 }
