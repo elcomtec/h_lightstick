@@ -2,13 +2,12 @@
   "ProductCertificationInfo": {
     "name": "&TEAM OFFICIAL LIGHT STICK V2",
     "model": "HYBEATMOLSV201",
-    "certificationLogos": ["KC", "FCC", "MIC", "EU", "IC"],
+    "certificationLogos": ["KC", "FCC", "MIC", "EU"],
     "certificationInfos": [
       "R-R-1EL-ATMV201",
       "2A9BA-ATMV201",
       "020-260224",
-      "-",
-      "30000-ATMV201"
+      "-"
     ]
   }
 }
