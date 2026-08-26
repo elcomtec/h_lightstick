@@ -2,13 +2,31 @@
   "ProductCertificationInfo": {
     "name": "CORTIS OFFICIAL LIGHT STICK",
     "model": "HYBECOROLSV101",
-    "certificationLogos": ["KC", "FCC", "MIC", "EU", "IC"],
+    "certificationLogos": [
+      "KC",
+      "FCC",
+      "MIC",
+      "EU",
+      "IC",
+      "NCC",
+      "NTC",
+      "NBTC",
+      "DJJD",
+      "IMDA",
+      "SIRIM"
+    ],
     "certificationInfos": [
       "R-R-1EL-CRTV101",
       "2A9BA-CRTV101",
       "020-260191",
       "-",
-      "30000-CRTV101"
+      "30000-CRTV101",
+      "CCAL26LP1050T1",
+      "ESD-RCE-2648771",
+      "SDoC SD04830-26",
+      "12435/DJID/2026/10325",
+      "DA107248",
+      "RGZE-15A-0826-S(26-4152)"
     ]
   }
 }
