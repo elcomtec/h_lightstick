@@ -1,0 +1,30 @@
+{
+  "ProductCertificationInfo": {
+    "name": "ENHYPEN OFFICIAL LIGHT STICK VER.2(RE)",
+    "model": "ENHNN26JOS901NN0",
+    "certificationLogos": [
+      "KC",
+      "FCC",
+      "MIC",
+      "EU",
+      "NBTC",
+      "NCC",
+      "SDPPI",
+      "IMDA",
+      "IC",
+      "ANATEL"
+    ],
+    "certificationInfos": [
+      "R-R-1EL-EN-S901",
+      "2A9BA-EN-S901",
+      "020-240258",
+      "-",
+      "SDoC SD05737-26",
+      "CCAL24LP0792T8",
+      "125402/DJID/2026/10325",
+      "-",
+      "30000-ENS901",
+      "05002-26-18288"
+    ]
+  }
+}
